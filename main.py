@@ -10,7 +10,7 @@ if not api_key:
 
 # Configure Gemini API
 genai.configure(api_key=api_key)
-model = genai.GenerativeModel("gemini-1.5-flash")
+model = genai.GenerativeModel("gemini-2.0-flash")
 
 # Define expected response categories
 EXPECTED_RESPONSES = {"Highly likely", "Likely", "Unlikely", "Highly unlikely"}
@@ -92,6 +92,7 @@ if "recommendations" not in st.session_state:
     st.session_state["recommendations"] = []
 
 # Streamlit app
+st.write("Disclaimer-------> Sometimes the Output might be wrong")
 st.title("Nigerian University Admission Predictor 🎓")
 st.subheader("Plan your future with confidence")
 st.write("""
@@ -100,7 +101,7 @@ st.write("""
 
 with st.sidebar:
     st.header("Enter Your Details")
-    jamb_score = st.number_input("Enter your JAMB score:", min_value=0, max_value=400, value=200)
+    jamb_score = st.number_input("Enter your JAMB score:", min_value=0, max_value=400)
     preferred_course = st.text_input("Preferred Course:")
     preferred_institution = st.text_input("Preferred Institution:")
 
@@ -131,12 +132,14 @@ if st.session_state["prediction"]:
 
 # Display recommended alternatives
 st.write("### 📌 Recommended Alternatives:")
-if st.session_state["recommendations"]:
-    recommendations = st.session_state["recommendations"]
-    if "Error" in recommendations[0]:
-        st.error(recommendations[0])
-    else:
-        for i, recommendation in enumerate(recommendations, start=1):
-            st.write(f"{i}. {recommendation}")
-else:
-    st.write("No recommendations available.")
+st.write("Coming soon")
+# if st.session_state["recommendations"]:
+#     recommendations = st.session_state["recommendations"]
+#     if "Error" in recommendations[0]:
+#         st.error(recommendations[0])
+#     else:
+#         for i, recommendation in enumerate(recommendations, start=1):
+#             st.write(f"{i}. {recommendation}")
+# else:
+#     st.write("No recommendations available.")
+
